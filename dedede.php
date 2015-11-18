@@ -7,8 +7,14 @@ if (phpversion() < "5.3") {
    }
 
 if ( array_key_exists("1",$_SERVER['argv']) ) {
-   define(PATH, getcwd() . "/" . $_SERVER['argv'][1]);
-   confirminit();
+   $path = $_SERVER['argv'][1];
+   if ($path[0] == DIRECTORY_SEPARATOR) {
+      define(PATH, $_SERVER['argv'][1]);
+      confirminit();
+   } else {
+      define(PATH, getcwd() . "/" . $_SERVER['argv'][1]);
+      confirminit();
+   }
 } else {
    // Get the current working directory
    define(PATH, getcwd());
