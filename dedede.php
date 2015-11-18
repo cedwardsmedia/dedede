@@ -1,0 +1,71 @@
+#!/usr/bin/php
+<?php
+
+if (phpversion() < "5.3") {
+   echo("Kirby CMS requires PHP 5.3 or greater. You are currently running PHP " . phpversion() . ". Please upgrade PHP.\n");
+   exit(1);
+   }
+
+if ( array_key_exists("1",$_SERVER['argv']) ) {
+   define(PATH, getcwd() . "/" . $_SERVER['argv'][1]);
+   confirminit();
+} else {
+   // Get the current working directory
+   define(PATH, getcwd());
+   confirminit();
+}
+
+function confirminit() {
+   echo "I will download Kirby to " . PATH .". Is that OK? [Y/N]: ";
+   $response = trim(fgets(STDIN));
+
+   if ($response == "Y"){
+      download();
+   } elseif ($response == "N"){
+      exit;
+   } else {
+      echo "Please type Y or N.\n";
+      confirminit();
+   }
+}
+
+function download(){
+   // Git clone Kirby Starter Kit to PATH
+   echo "+ Now git'n Kirby...\n";
+   shell_exec("git clone https://github.com/getkirby/starterkit " . PATH);
+   chdir(PATH);
+   echo "Kirby downloaded to: " . getcwd() ."\n";
+   shell_exec("git remote remove origin");
+   // Initialize the Kirby System Folder submodule
+   echo "- Initializing Kirby system folder...\n";
+   shell_exec("git submodule init kirby && git submodule update kirby");
+
+   // Initialize Kirby Toolkit
+   echo "- Initizalizing Kirby toolkit...\n";
+   chdir("kirby");
+   shell_exec("git submodule init toolkit && git submodule update toolkit");
+   chdir(PATH);
+
+   // Ask if we want to keep the panel
+   echo "+ Do you want to install the Kirby panel? [Y/N]: ";
+   $response = trim(fgets(STDIN));
+
+   if ($response == "Y"){
+      echo "Initializing Kirby Panel...\n";
+      shell_exec("git submodule init panel && git submodule update panel");
+   } elseif ($response == "N"){
+      echo "Removing Kirby Panel\n";
+      shell_exec("git rm --cached panel");
+   } else {
+      echo "Please type Y or N.";
+   }
+   echo "Do you want to start the built-in PHP development server? [Y/N]:";
+
+   $response = trim(fgets(STDIN));
+   if ($response == "Y"){
+      echo "PHP: Development Server running on http://localhost:8000\n";
+      shell_exec("php -S localhost:8000");
+   } else {
+      exit();
+   }
+}
