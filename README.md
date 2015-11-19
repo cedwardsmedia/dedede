@@ -11,7 +11,7 @@ _Dedede_ is a command line script for creating a [Kirby CMS](http://www.getkirby
  - PHP 5.3
  - Git
 
-**Note**: Dedede only requires PHP and Git to work. However, it will check if your system meets the requirements for Kirby.
+**Note**: Dedede only requires PHP and Git to work. It will throw an error if you are running anything earlier than PHP 5.3. As Dedede is intended for use during development and design of a Kirby-based project, Dedede does not (and likely never will) check for Apache 2 with mod_rewrite or NGINX.
 
 ## Installation
 
