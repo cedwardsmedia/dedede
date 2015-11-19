@@ -7,6 +7,12 @@
 
 _Dedede_ is a command line script for creating a [Kirby CMS](http://www.getkirby.com/) project. It automates the repetitive tasks of cloning the Kirby git repo, initializing the submodules, etc. Dedede was originally written to automate my workflow to make life easier and allow me to spend my time where it belongs - building the website, not preparing the project.
 
+## Requirements
+ - PHP 5.3
+ - Git
+
+**Note**: Dedede only requires PHP and Git to work. However, it will check if your system meets the requirements for Kirby.
+
 ## Installation
 
 1. Clone the repo.
