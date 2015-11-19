@@ -67,6 +67,10 @@ function download(){
 
    echo "+ Success! Kirby has been installed to " . PATH . "\n";
 
+   if (!extension_loaded('mbstring')) {
+      echo "Warning: UTF-8 support in PHP not found. (mbstring extension not loaded.)";
+   }
+
    /* echo "Do you want to start the built-in PHP development server? [Y/N]:";
 
    $response = trim(fgets(STDIN));
