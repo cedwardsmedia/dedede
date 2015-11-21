@@ -38,7 +38,9 @@ You can run Dedede two ways.
 
 ## To-do:
 
-1. Think of something to add here
+1. Add ability to update existing Kirby installation
+2. Add ability to check various parameters of existing Kirby installation
+3. Think of something to add here
 
 ## Credits
 Concept and original codebase: Corey Edwards ([@cedwardsmedia](https://www.twitter.com/cedwardsmedia))
