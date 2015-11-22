@@ -94,3 +94,8 @@ function download(){
       exit();
    }*/
 }
+
+function usage() {
+   echo "Usage goes here";
+   exit;
+}
