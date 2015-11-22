@@ -18,7 +18,9 @@ _Dedede_ is a command line script for creating a [Kirby CMS](http://www.getkirby
 ## Installation
 
 1. Clone the repo.
-2. Create an symbolic link to Dedede by running `sudo ln -s /path/to/dedede.php /usr/local/dedede`.
+2. Ensure dedede.php is executable by running `chmod +x /path/to/dedede.php`
+3. - Run dedede by executing `php dedede.php [command] [path]` OR
+   - Create an symbolic link to Dedede by running `sudo ln -s /path/to/dedede.php /usr/local/dedede`. _The remainder of this document assumes this approach._
 
 ## Usage
 
