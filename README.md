@@ -19,10 +19,14 @@ _Dedede_ is a command line script for creating a [Kirby CMS](http://www.getkirby
 2. Create an symbolic link to Dedede by running `sudo ln -s /path/to/dedede.php /usr/local/dedede`.
 
 ## Usage
-You can run Dedede two ways.
 
-1. `cd` to the existing **empty** directory you want to use for your project and run `dedede`. Dedede will download Kirby to the current working directory. Thus, this directory **MUST** be empty.
-2. You can run `dedede /path/to/project` to have Dedede download Kirby to the specified path, creating it if it does not exist. Dedede accepts relative and absolute paths.
+#### Installing Kirby
+- `cd` to the existing **empty** directory you want to use for your project and run `dedede install`. Dedede will download Kirby to the current working directory. Thus, this directory **MUST** be empty.
+- You can run `dedede install /path/to/project` to have Dedede download Kirby to the specified path, creating it if it does not exist. Dedede accepts relative and absolute paths.
+
+#### Updating Kirby
+- `cd` to the existing Kirby project and run `dedede update`. Dedede will update the Kirby installation in the current working directory.
+- You can run `dedede update /path/to/project` to have Dedede update the Kirby installation at the specified path. Dedede accepts relative and absolute paths.
 
 ## Contributing
 
@@ -34,19 +38,31 @@ You can run Dedede two ways.
 
 ## History
 
- - **[_Nov 18, 2015_]: 1.0** Initial stable release
+ - **[_Nov 22, 2015_]: 1.0** Major internal changes.
+   - Introduced `install` and `update` commands.
+   - Introduced `-v` & `--version` and `-h` & `--help` flags to print the version and help, respectively.
+   - Running Dedede without a command now prints usage information.
+   - Added sanity checks for path argument. (For handling `./`, `../`, etc.)
+
+
+ - [_Nov 18, 2015_]: 0.1 Initial stable release
 
 ## To-do:
 
-1. Add ability to update existing Kirby installation
-2. Add ability to check various parameters of existing Kirby installation
-3. Think of something to add here
+1. Add ability to check various parameters of existing Kirby installation
+2. Check target path before installing or updating.
+3. Add ability to "git-ify" non-git-based Kirby installation. (i.e. one downloaded explicitly as ZIP file from Kirby site)
+4. Add error handling.
+5. Think of something else to add here.
+
 
 ## Credits
 Concept and original codebase: Corey Edwards ([@cedwardsmedia](https://www.twitter.com/cedwardsmedia))
 
 ## License
 _Dedede_ is licensed under the **MIT License**. See LICENSE for more.
+
+Made for **Kirby** with **♥**
 
 ---
 **Disclaimer**: _Dedede_ is not endorsed by, sponsored by, or otherwise associated with [Kirby](http://www.getkirby.com).

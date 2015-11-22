@@ -32,8 +32,6 @@ if ( array_key_exists ("1", $_SERVER['argv']) ) {
    } else {
       define(COMMAND, $_SERVER['argv'][1]);
    }
-} else {
-   usage();
 }
 
 // Determine our target path
