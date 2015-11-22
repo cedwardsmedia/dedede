@@ -5,6 +5,8 @@
 [![License](https://img.shields.io/badge/license-MIT-lightgrey.svg?style=flat-square "License")](./LICENSE)
 [![Gratipay](https://img.shields.io/gratipay/cedwardsmedia.svg?style=flat-square "License")](https://gratipay.com/~cedwardsmedia/)
 
+Made for **Kirby** with **♥**
+
 _Dedede_ is a command line script for creating a [Kirby CMS](http://www.getkirby.com/) project. It automates the repetitive tasks of cloning the Kirby git repo, initializing the submodules, etc. Dedede was originally written to automate my workflow to make life easier and allow me to spend my time where it belongs - building the website, not preparing the project.
 
 ## Requirements
@@ -61,8 +63,6 @@ Concept and original codebase: Corey Edwards ([@cedwardsmedia](https://www.twitt
 
 ## License
 _Dedede_ is licensed under the **MIT License**. See LICENSE for more.
-
-Made for **Kirby** with **♥**
 
 ---
 **Disclaimer**: _Dedede_ is not endorsed by, sponsored by, or otherwise associated with [Kirby](http://www.getkirby.com).
