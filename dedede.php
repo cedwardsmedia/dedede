@@ -13,6 +13,19 @@ if ( array_key_exists ("1", $_SERVER['argv']) ) {
    usage();
 }
 
+// Determine our target path
+if ( array_key_exists("2",$_SERVER['argv']) ) {
+   $path = $_SERVER['argv'][2];
+   if ($path[0] == DIRECTORY_SEPARATOR) {
+      define(PATH, $_SERVER['argv'][1]);
+   } else {
+      define(PATH, getcwd() . "/" . $_SERVER['argv'][1]);
+   }
+} else {
+   // Get the current working directory
+   define(PATH, getcwd());
+}
+
 // Process command
 switch (COMMAND) {
    // Let's install Kirby!
@@ -31,42 +44,23 @@ switch (COMMAND) {
       break;
 }
 
+
 // This function is called when the install command is passed
 function install() {
-   if ( array_key_exists("2",$_SERVER['argv']) ) {
-      $path = $_SERVER['argv'][2];
-      if ($path[0] == DIRECTORY_SEPARATOR) {
-         define(PATH, $_SERVER['argv'][1]);
-         confirminstall();
-      } else {
-         define(PATH, getcwd() . "/" . $_SERVER['argv'][1]);
-         confirminstall();
-      }
-   } else {
-      // Get the current working directory
-      define(PATH, getcwd());
-      confirminstall();
-   }
-}
-
-function update() {
-
-}
-function confirminstall() {
    echo "I will download Kirby to " . PATH ."\nIs that OK? [Y/N]: ";
    $response = trim(fgets(STDIN));
 
    if ($response == "Y"){
-      download();
+      doinstall();
    } elseif ($response == "N"){
       exit;
    } else {
       echo "Please type Y or N.\n";
-      confirminit();
+      install();
    }
 }
 
-function download(){
+function doinstall(){
    // Git clone Kirby Starter Kit to PATH
    echo "+ Working...\n";
    echo "  - Cloning Kirby...\n";
@@ -111,6 +105,38 @@ function download(){
    } else {
       exit();
    }*/
+}
+function update() {
+   // Ask if we want to keep the panel
+   echo "+ Do you want to update Kirby at " . PATH . "? [Y/N]: ";
+   $response = trim(fgets(STDIN));
+
+   if ($response == "Y"){
+      doupdate();
+   } elseif ($response == "N"){
+      exit;
+   } else {
+      echo "Please type Y or N.";
+   }
+}
+function doupdate() {
+   echo "+ Working...\n";
+   chdir(PATH);
+   // Update the Kirby System Folder submodule
+   echo "  - Updating Kirby system folder...\n";
+   shell_exec("git submodule --quiet update kirby");
+
+   // Update Kirby Toolkit
+   echo "  - Updating Kirby toolkit...\n";
+   chdir("kirby");
+   shell_exec("git submodule --quiet update toolkit");
+   chdir(PATH);
+
+   if (file_exists('panel')) {
+      echo "  - Updating Kirby Panel…\n";
+      shell_exec("git submodule --quiet update panel");
+   }
+   echo "+ Success! Kirby has been updated at " . PATH . "\n";
 }
 
 function usage() {
