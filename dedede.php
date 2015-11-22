@@ -13,28 +13,46 @@ if ( array_key_exists ("1", $_SERVER['argv']) ) {
    usage();
 }
 
-if ( array_key_exists("2",$_SERVER['argv']) ) {
-   $path = $_SERVER['argv'][2];
-   if ($path[0] == DIRECTORY_SEPARATOR) {
-      define(PATH, $_SERVER['argv'][1]);
-      confirminit();
-   } else {
-      define(PATH, getcwd() . "/" . $_SERVER['argv'][1]);
-      confirminit();
-   }
-} else {
-   // Get the current working directory
-   define(PATH, getcwd());
-   confirminit();
-}
-function install() {
+// Process command
+switch (COMMAND) {
+   // Let's install Kirby!
+   case 'install':
+      install();
+      break;
 
+   case 'update':
+   // Let's update Kirby!
+      update();
+      break;
+
+   default:
+      # No command was passed, print usage
+      usage();
+      break;
+}
+
+// This function is called when the install command is passed
+function install() {
+   if ( array_key_exists("2",$_SERVER['argv']) ) {
+      $path = $_SERVER['argv'][2];
+      if ($path[0] == DIRECTORY_SEPARATOR) {
+         define(PATH, $_SERVER['argv'][1]);
+         confirminstall();
+      } else {
+         define(PATH, getcwd() . "/" . $_SERVER['argv'][1]);
+         confirminstall();
+      }
+   } else {
+      // Get the current working directory
+      define(PATH, getcwd());
+      confirminstall();
+   }
 }
 
 function update() {
 
 }
-function confirminit() {
+function confirminstall() {
    echo "I will download Kirby to " . PATH ."\nIs that OK? [Y/N]: ";
    $response = trim(fgets(STDIN));
 
