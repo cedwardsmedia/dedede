@@ -6,9 +6,14 @@ if (phpversion() < "5.3") {
    exit(1);
    }
 
-if ( array_key_exists("2",$_SERVER['argv']) ) {
+// Check to see if a command has been issued
+if ( array_key_exists ("1", $_SERVER['argv']) ) {
    define(COMMAND, $_SERVER['argv'][1]);
+} else {
+   usage();
+}
 
+if ( array_key_exists("2",$_SERVER['argv']) ) {
    $path = $_SERVER['argv'][2];
    if ($path[0] == DIRECTORY_SEPARATOR) {
       define(PATH, $_SERVER['argv'][1]);
@@ -22,7 +27,13 @@ if ( array_key_exists("2",$_SERVER['argv']) ) {
    define(PATH, getcwd());
    confirminit();
 }
+function install() {
 
+}
+
+function update() {
+
+}
 function confirminit() {
    echo "I will download Kirby to " . PATH ."\nIs that OK? [Y/N]: ";
    $response = trim(fgets(STDIN));
