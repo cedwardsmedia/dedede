@@ -1,4 +1,5 @@
-# Dedede v1.0
+![Dedede v1.0](https://cdn.cedwardsmedia.com/images/dedede/dededelogo.png "Dedede Logo")
+
 
 [![Source](https://img.shields.io/badge/source-cedwardsmedia/dedede-blue.svg?style=flat-square "Source")](https://www.github.com/cedwardsmedia/dedede)
 ![Version](https://img.shields.io/badge/version-1.0-brightgreen.svg?style=flat-square)
