@@ -25,11 +25,16 @@ if ( array_key_exists ("1", $_SERVER['argv']) ) {
 
    // Process flags
 
+   // If user passes --version or -v
    if (in_array("--version", $_SERVER['argv']) || in_array("-v", $_SERVER['argv'])){
       version(); // Show version information
+
+   // If user passes --help or -h
    } elseif (in_array("--help", $_SERVER['argv']) || in_array("-h", $_SERVER['argv'])){
       help(); // Show help
    } else {
+
+      // If no valid flag was passed, consider it a command
       define(COMMAND, $_SERVER['argv'][1]);
    }
 }
@@ -211,7 +216,7 @@ function help() {
 
 // Print usage information
 function usage() {
-   echo "Usage: dedede [command] /path/to/project\n\n  + Available commands:\n    - install => Dedede will install a fresh copy of Kirby to the specified path.\n      Example: dedede install /home/cedwardsmedia/kirby\n\n    - update => Dedede will update the existing copy of Kirby at the specified path.\n      Example: dedede update /home/cedwardsmedia/kirby-outdated\n\n  + Caveats:\n    - Dedede does not currently understand relative paths (./ ../ ~/ etc.)\n    - When installing Kirby, the path must either not exist or must be empty.\n    - Dedede can not update a non-git (or non-Dedede installed) copy of Kirby.\n\n  + Notes:\n    - Dedede officially supports Kirby 2.2+. However, it should work for all of 2.x\n";
+   echo "Usage: dedede [command] /path/to/project\n\n  + Available commands:\n    - install => Dedede will install a fresh copy of Kirby to the specified path.\n      Example: dedede install /home/cedwardsmedia/kirby\n\n    - update => Dedede will update the existing copy of Kirby at the specified path.\n      Example: dedede update /home/cedwardsmedia/kirby-outdated\n\n  + Caveats:\n    - Dedede does not currently handle errors encountered during git processes.\n      (This will be fixed very soon.)\n    - When installing Kirby, the path must either not exist or must be empty.\n    - Dedede can not update a non-git (or non-Dedede installed) copy of Kirby.\n\n  + Notes:\n    - Dedede officially supports Kirby 2.2+. However, it should work for all of 2.x\n";
    exit(0);
 }
 
