@@ -25,11 +25,16 @@ if ( array_key_exists ("1", $_SERVER['argv']) ) {
 
    // Process flags
 
+   // If user passes --version or -v
    if (in_array("--version", $_SERVER['argv']) || in_array("-v", $_SERVER['argv'])){
       version(); // Show version information
+
+   // If user passes --help or -h
    } elseif (in_array("--help", $_SERVER['argv']) || in_array("-h", $_SERVER['argv'])){
       help(); // Show help
    } else {
+
+      // If no valid flag was passed, consider it a command
       define(COMMAND, $_SERVER['argv'][1]);
    }
 }
@@ -106,22 +111,11 @@ function install() {
 // The meat of the script. Here, we actually download and install Kirby
 function doinstall(){
 
-   // Git clone Kirby Starter Kit to PATH
-   echo "+ Working...\n";
-   echo "  - Cloning Kirby...\n";
-   shell_exec("git clone https://github.com/getkirby/starterkit " . PATH . " --quiet ");
-   chdir(PATH);
-   shell_exec("git remote remove origin");
+   install_kirby();
 
-   // Initialize the Kirby System Folder submodule
-   echo "  - Initializing Kirby system folder...\n";
-   shell_exec("git submodule --quiet init kirby && git submodule --quiet update kirby");
+   init_kirby();
 
-   // Initialize Kirby Toolkit
-   echo "  - Initizalizing Kirby toolkit...\n";
-   chdir("kirby");
-   shell_exec("git submodule --quiet init toolkit && git submodule --quiet update toolkit");
-   chdir(PATH);
+   init_toolkit();
 
    // Ask if we want to keep the panel
    echo "+ Do you want to install the Kirby Panel? [Y/N]: ";
@@ -159,7 +153,28 @@ function doinstall(){
       exit();
    }*/
 }
+function install_kirby() {
+   // Git clone Kirby Starter Kit to PATH
+   echo "+ Working...\n";
+   echo "  - Cloning Kirby...\n";
+   shell_exec("git clone https://github.com/getkirby/starterkit " . PATH . " --quiet ");
+   chdir(PATH);
+   shell_exec("git remote remove origin");
+}
 
+function init_kirby() {
+   // Initialize the Kirby System Folder submodule
+   echo "  - Initializing Kirby system folder...\n";
+   shell_exec("git submodule --quiet init kirby && git submodule --quiet update kirby");
+}
+
+function init_toolkit() {
+   // Initialize Kirby Toolkit
+   echo "  - Initizalizing Kirby toolkit...\n";
+   chdir("kirby");
+   shell_exec("git submodule --quiet init toolkit && git submodule --quiet update toolkit");
+   chdir(PATH);
+}
 // This function let's us update Kirby using git submodules
 function update() {
    // Confirm that we want to update Kirby at PATH
@@ -211,7 +226,7 @@ function help() {
 
 // Print usage information
 function usage() {
-   echo "Usage: dedede [command] /path/to/project\n\n  + Available commands:\n    - install => Dedede will install a fresh copy of Kirby to the specified path.\n      Example: dedede install /home/cedwardsmedia/kirby\n\n    - update => Dedede will update the existing copy of Kirby at the specified path.\n      Example: dedede update /home/cedwardsmedia/kirby-outdated\n\n  + Caveats:\n    - Dedede does not currently understand relative paths (./ ../ ~/ etc.)\n    - When installing Kirby, the path must either not exist or must be empty.\n    - Dedede can not update a non-git (or non-Dedede installed) copy of Kirby.\n\n  + Notes:\n    - Dedede officially supports Kirby 2.2+. However, it should work for all of 2.x\n";
+   echo "Usage: dedede [command] /path/to/project\n\n  + Available commands:\n    - install => Dedede will install a fresh copy of Kirby to the specified path.\n      Example: dedede install /home/cedwardsmedia/kirby\n\n    - update => Dedede will update the existing copy of Kirby at the specified path.\n      Example: dedede update /home/cedwardsmedia/kirby-outdated\n\n  + Caveats:\n    - Dedede does not currently handle errors encountered during git processes.\n      (This will be fixed very soon.)\n    - When installing Kirby, the path must either not exist or must be empty.\n    - Dedede can not update a non-git (or non-Dedede installed) copy of Kirby.\n\n  + Notes:\n    - Dedede officially supports Kirby 2.2+. However, it should work for all of 2.x\n";
    exit(0);
 }
 
