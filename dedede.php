@@ -2,7 +2,7 @@
 <?php
 
 // Define values
-define(VERSION, "1.0"); // Dedede version
+define(VERSION, "1.0.1"); // Dedede version
 define(MINPHPVER, "5.3"); // Minimum supported PHP version
 
 // Bootstrap check
@@ -90,6 +90,8 @@ switch (COMMAND) {
 // This function is called when the install command is passed
 function install() {
 
+   precheck();
+
    // Confirm that the user wants to install Kirby to the chosen path
    echo "I will download Kirby to " . PATH ."\nIs that OK? [Y/N]: ";
    $response = trim(fgets(STDIN));
@@ -113,9 +115,9 @@ function doinstall(){
 
    install_kirby();
 
-   init_kirby();
+   initialize_kirby();
 
-   init_toolkit();
+   initialize_toolkit();
 
    // Ask if we want to keep the panel
    echo "+ Do you want to install the Kirby Panel? [Y/N]: ";
@@ -157,18 +159,22 @@ function install_kirby() {
    // Git clone Kirby Starter Kit to PATH
    echo "+ Working...\n";
    echo "  - Cloning Kirby...\n";
-   shell_exec("git clone https://github.com/getkirby/starterkit " . PATH . " --quiet ");
+   shell_exec("git clone https://github.com/getkirby/starterkit " . PATH . " --quiet");
+
+   // Change back to PATH
    chdir(PATH);
+
+   // Remove the Kirby origin
    shell_exec("git remote remove origin");
 }
 
-function init_kirby() {
+function initialize_kirby() {
    // Initialize the Kirby System Folder submodule
    echo "  - Initializing Kirby system folder...\n";
    shell_exec("git submodule --quiet init kirby && git submodule --quiet update kirby");
 }
 
-function init_toolkit() {
+function initialize_toolkit() {
    // Initialize Kirby Toolkit
    echo "  - Initizalizing Kirby toolkit...\n";
    chdir("kirby");
@@ -177,6 +183,9 @@ function init_toolkit() {
 }
 // This function let's us update Kirby using git submodules
 function update() {
+
+   precheck();
+
    // Confirm that we want to update Kirby at PATH
    echo "+ Do you want to update Kirby at " . PATH . "? [Y/N]: ";
    $response = trim(fgets(STDIN));
@@ -218,6 +227,29 @@ function doupdate() {
    exit(0);
 }
 
+
+// Perform various checks before installing or updating
+function precheck() {
+
+   // Check if the target PATH exists
+   if (file_exists(PATH)) {
+      // Check if the target PATH is empty
+      if (count(scandir(PATH)) > 2) {
+         exit("Dedede cannot install Kirby to " .PATH . "\n" . PATH ." is not empty.\n");
+      }
+
+      // Check of the target PATH is writeable
+      if (!is_writable(PATH)) {
+         exit("Dedede cannot write to " . PATH . "\n");
+      }
+   }
+
+   // Check that we can connect to Github
+   $fp = fsockopen("github.com", 9418, $errno, $errstr, 5);
+   if (!$fp) {
+      echo "Dedede cannot connect to Github.com\n $errstr ($errno)\n";
+   }
+}
 // Print simple help information for Dedede
 function help() {
    echo "Dedede is a command line tool for creating and updating Kirby CMS installations.\n\nDedede can install the latest Kirby release to a directory of your choosing by executing `dedede install /path/to/install/kirby`. Dedede will download the latest Kirby release from Github and ask if you wish to install the Kirby Panel. By using Dedede, you can remove many of the, otherwise tedious, steps involved in setting up an easily updateable Kirby installation.\n\nDedede can update any Kirby installation that was cloned from Github or created using Dedede. Dedede uses git submodules to do this.\n\nDedede is a personal project that may or may not receive new features beyond this core functionality. Dedede was crafted by Corey Edwards (@cedwardsmedia) and is licensed under the MIT License.\n";
