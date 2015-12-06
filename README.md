@@ -73,10 +73,9 @@ _Dedede_ is a command line script for creating a [Kirby CMS](http://www.getkirby
 ## To-do:
 
 1. Add ability to check various parameters of existing Kirby installation
-2. Check target path before installing or updating.
-3. Add ability to "git-ify" non-git-based Kirby installation. (i.e. one downloaded explicitly as ZIP file from Kirby site)
-4. Add error handling.
-5. Think of something else to add here.
+2. Add ability to "git-ify" non-git-based Kirby installation. (i.e. one downloaded explicitly as ZIP file from Kirby site)
+3. Consider adding ability to download and install Kirby themes. (long-term)
+4. Think of something else to add here.
 
 
 ## Credits
