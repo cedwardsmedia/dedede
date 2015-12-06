@@ -191,7 +191,7 @@ function update() {
    precheck();
 
    if (!is_kirby(PATH)) {
-      exit("Dedede cannot find a Kirby installation at " . PATH);
+      exit("Dedede cannot find a Kirby installation at " . PATH . "\n");
    } elseif (!is_git(PATH)){
       exit("\nIt seems Dedede did not install Kirby to " . PATH . "\nAlternatively, the Kirby installation wasn't cloned with git.\nDedede can only update Kirby installations installed with Dedede or cloned with git.\n\n");
    }
