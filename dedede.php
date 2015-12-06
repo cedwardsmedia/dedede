@@ -153,15 +153,7 @@ function doinstall(){
    }
 
    exit(0);
-   /* echo "Do you want to start the built-in PHP development server? [Y/N]:";
 
-   $response = trim(fgets(STDIN));
-   if ($response == "Y"){
-      echo "PHP: Development Server running on http://localhost:8000\n";
-      shell_exec("php -S localhost:8000");
-   } else {
-      exit();
-   }*/
 }
 function install_kirby() {
    // Git clone Kirby Starter Kit to PATH
