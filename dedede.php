@@ -242,7 +242,7 @@ function precheck() {
 
       if (COMMAND == "install") {
          // Check if the target PATH is empty
-         if (count(scandir(PATH)) > 2) {
+         if (!is_empty(PATH)) {
             exit("Dedede cannot install Kirby to " .PATH . "\n" . PATH ." is not empty.\n");
          }
       }
@@ -256,6 +256,15 @@ function precheck() {
    // Check that we can connect to Github
    if (!fsockopen("github.com", 9418, $errno, $errstr, 5)) {
       exit("Dedede cannot connect to Github: $errstr ($errno)\nDedede must be able to connect to GitHub on port 9418 to download Kirby.\n");
+   }
+}
+
+// Check if directory is empty
+function is_empty($path) {
+   if (count(scandir($path)) > 2) {
+      return 0;
+   } else {
+      return 1;
    }
 }
 
