@@ -186,6 +186,12 @@ function update() {
 
    precheck();
 
+   if (!file_exists(PATH. "/kirby/kirby.php")) {
+      exit("Dedede cannot find a Kirby installation at " . PATH);
+   } elseif (!file_exists(PATH . "/.git/config")){
+      exit("\nIt seems Dedede did not install Kirby to " . PATH . "\nAlternatively, the Kirby installation wasn't cloned with git.\nDedede can only update Kirby installations installed with Dedede or cloned with git.\n\n");
+   }
+
    // Confirm that we want to update Kirby at PATH
    echo "+ Do you want to update Kirby at " . PATH . "? [Y/N]: ";
    $response = trim(fgets(STDIN));
@@ -233,9 +239,12 @@ function precheck() {
 
    // Check if the target PATH exists
    if (file_exists(PATH)) {
-      // Check if the target PATH is empty
-      if (count(scandir(PATH)) > 2) {
-         exit("Dedede cannot install Kirby to " .PATH . "\n" . PATH ." is not empty.\n");
+
+      if (COMMAND == "install") {
+         // Check if the target PATH is empty
+         if (count(scandir(PATH)) > 2) {
+            exit("Dedede cannot install Kirby to " .PATH . "\n" . PATH ." is not empty.\n");
+         }
       }
 
       // Check of the target PATH is writeable
