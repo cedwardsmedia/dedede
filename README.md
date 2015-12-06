@@ -1,8 +1,8 @@
-![Dedede v1.0.1](https://cdn.cedwardsmedia.com/images/dedede/dededelogo.png "Dedede Logo")
+![Dedede v1.1.0](https://cdn.cedwardsmedia.com/images/dedede/dededelogo.png "Dedede Logo")
 
 
 [![Source](https://img.shields.io/badge/source-cedwardsmedia/dedede-blue.svg?style=flat-square "Source")](https://www.github.com/cedwardsmedia/dedede)
-![Version](https://img.shields.io/badge/version-1.0.1-brightgreen.svg?style=flat-square)
+![Version](https://img.shields.io/badge/version-1.1.0-brightgreen.svg?style=flat-square)
 [![License](https://img.shields.io/badge/license-MIT-lightgrey.svg?style=flat-square "License")](./LICENSE)
 [![Gratipay](https://img.shields.io/gratipay/cedwardsmedia.svg?style=flat-square "License")](https://gratipay.com/~cedwardsmedia/)
 
@@ -20,7 +20,7 @@ _Dedede_ is a command line script for creating a [Kirby CMS](http://www.getkirby
 
 1. Clone the repo.
 2. Ensure dedede.php is executable by running `chmod +x /path/to/dedede.php`
-3. - Run dedede by executing `php dedede.php [command] [path]` OR
+3. Run dedede by executing `php dedede.php [command] [path]` OR
    - Create an symbolic link to Dedede by running `sudo ln -s /path/to/dedede.php /usr/local/dedede`. _The remainder of this document assumes this approach._
 
 ## Usage
@@ -43,7 +43,16 @@ _Dedede_ is a command line script for creating a [Kirby CMS](http://www.getkirby
 
 ## History
 
- - **[_Dec 4, 2015_]: 1.0.1** Added pre-install and pre-update sanity checks.
+- **[_Dec 6, 2015_]: 1.1.0** Added debug command and internal changes
+  - Introduced `debug` command for printing out various information useful for troubleshooting and debugging real-world user scenarios.
+  - Relaxed Y/N input to accept case-insensitive "yes" and "no" entries.
+  - Introduced new internal functions and consolidated previously reused code to optimize Dedede.
+  - Added more error handlers to reduce gibberish for non-dev users.
+  - Fixed a bug where Dedede would attempt to update Panel even if it wasn't installed, thus printing an error to the screen.
+  - Fixed a bug where Dedede would not properly check for Kirby before attempting to update.
+
+
+ - [_Dec 4, 2015_]: 1.0.1 Added pre-install and pre-update sanity checks.
    - Dedede now checks to see if the target path exists and is empty. This will prevent most (if not all) git-based errors Dedede encounters.
    - Dedede now checks connectivity with Github.com before attempting to clone or update Kirby. If we can't connect, we can't install or update, right?
 
