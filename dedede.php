@@ -186,7 +186,7 @@ function update() {
 
    precheck();
 
-   if (!file_exists(PATH. "/kirby/kirby.php")) {
+   if (!is_kirby(PATH)) {
       exit("Dedede cannot find a Kirby installation at " . PATH);
    } elseif (!file_exists(PATH . "/.git/config")){
       exit("\nIt seems Dedede did not install Kirby to " . PATH . "\nAlternatively, the Kirby installation wasn't cloned with git.\nDedede can only update Kirby installations installed with Dedede or cloned with git.\n\n");
@@ -259,6 +259,14 @@ function precheck() {
    }
 }
 
+// Check if directory is a Kirby installation
+function is_kirby($path) {
+   if (file_exists($path. "/kirby/kirby.php")) {
+      return 1;
+   } else {
+      return 0;
+   }
+}
 // Print Debug information for developer
 function debug() {
    // Print General System Information
