@@ -320,14 +320,14 @@ function debug() {
    echo " + Target: " . PATH . "\n";
    echo " + Target writeable: ";
    if (is_writeable(PATH)) {echo "Yes\n";} else {echo "No\n";}
-   echo " + Target empty: ";
-   if (count(scandir(PATH)) > 2) {echo "No\n";} else {echo "Yes\n";}
+   echo " + Target Empty: ";
+   if (is_empty(PATH)) {echo "Yes\n";} else {echo "No\n";}
    echo " + Target Kirby: ";
-   if (file_exists(PATH. "/kirby/kirby.php")) {echo "Yes\n";} else {echo "No\n";}
+   if (is_kirby(PATH)) {echo "Yes\n";} else {echo "No\n";}
    echo " + Target Panel: ";
-   if (file_exists(PATH. "/panel/index.php")) {echo "Yes\n";} else {echo "No\n";}
+   if (has_panel(PATH)) {echo "Yes\n";} else {echo "No\n";}
    echo " + Target Git Repo: ";
-   if (file_exists(PATH. "/.git/config")) {echo "Yes\n";} else {echo "No\n";}
+   if (is_git(PATH)) {echo "Yes\n";} else {echo "No\n";}
    echo "\n\nPlease include the above output in your support request.\n";
 }
 
