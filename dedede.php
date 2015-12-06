@@ -224,7 +224,7 @@ function doupdate() {
    chdir(PATH); // Change back to Kirby project directory
 
    // Update the Panel if it exists
-   if (file_exists('panel')) {
+   if (file_exists(PATH . '/panel/index.php')) {
       echo "  - Updating Kirby Panel…\n";
       shell_exec("git submodule --quiet update panel");
    }
