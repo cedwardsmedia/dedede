@@ -254,9 +254,8 @@ function precheck() {
    }
 
    // Check that we can connect to Github
-   $fp = fsockopen("github.com", 9418, $errno, $errstr, 5);
-   if (!$fp) {
-      echo "Dedede cannot connect to Github.com\n $errstr ($errno)\n";
+   if (!fsockopen("github.com", 9418, $errno, $errstr, 5)) {
+      exit("Dedede cannot connect to Github: $errstr ($errno)\nDedede must be able to connect to Github on port 9418 to download Kirby.\n");
    }
 }
 // Print simple help information for Dedede
