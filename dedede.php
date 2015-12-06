@@ -132,8 +132,7 @@ function ask($Q) {
 // The meat of the script. Here, we actually download and install Kirby
 function doinstall(){
 
-   install_kirby();
-
+   clone_kirby();
    initialize_kirby();
 
    initialize_toolkit();
@@ -159,7 +158,7 @@ function doinstall(){
    exit(0);
 
 }
-function install_kirby() {
+function clone_kirby() {
    // Git clone Kirby Starter Kit to PATH
    echo "+ Working...\n";
    echo "  - Cloning Kirby...\n";
