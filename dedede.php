@@ -5,6 +5,9 @@
 define(VERSION, "1.0.1"); // Dedede version
 define(MINPHPVER, "5.3"); // Minimum supported PHP version
 
+// Disable error reporting
+error_reporting(E_ERROR | E_PARSE);
+
 // Bootstrap check
 
 // Check our PHP version
