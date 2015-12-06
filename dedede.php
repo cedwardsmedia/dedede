@@ -224,8 +224,8 @@ function doupdate() {
    chdir(PATH); // Change back to Kirby project directory
 
    // Update the Panel if it exists
-   if (file_exists(PATH . '/panel/index.php')) {
-      echo "  - Updating Kirby Panel…\n";
+   if (has_panel(PATH)) {
+      echo "  - Updating Kirby Panel...\n";
       shell_exec("git submodule --quiet update panel");
    }
    // We really need to validate the status before printing this
@@ -271,6 +271,15 @@ function is_empty($path) {
 // Check if directory is a Kirby installation
 function is_kirby($path) {
    if (file_exists($path. "/kirby/kirby.php")) {
+      return 1;
+   } else {
+      return 0;
+   }
+}
+
+// Check if Kirby has panel
+function has_panel($path) {
+   if (file_exists(PATH . "/panel/index.php")) {
       return 1;
    } else {
       return 0;
