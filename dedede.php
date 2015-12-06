@@ -98,10 +98,10 @@
       echo "$Q [Y/N]: ";
       $response = trim(fgets(STDIN));
 
-      if ($response == "Y"){
+      if (strtoupper($response) == "Y" || strtoupper($response) == "YES"){
          // User confirmed Panel install. Let's init the submodule
          return TRUE;
-      } elseif ($response == "N"){
+      } elseif (strtoupper($response) == "N" || strtoupper($response) == "NO"){
          return FALSE;
       } else {
          // User did not enter Y or N
