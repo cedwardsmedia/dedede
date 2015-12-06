@@ -191,6 +191,30 @@
       } else {
          exit; // User refused update. Let's exit.
       }
+// Install Kirby Panel using git submodules
+   function installpanel() {
+   // Run precheck to prevent common errors
+      precheck();
+      if (!is_kirby(PATH)) {
+         exit("Dedede cannot find a Kirby installation at " . PATH . "\n");
+      } elseif (!is_git(PATH)){
+         exit("\nIt seems Dedede did not install Kirby to " . PATH . "\nAlternatively, the Kirby installation wasn't cloned with git.\nDedede can only update Kirby installations installed with Dedede or cloned with git.\n\n");
+      }
+
+
+   // Confirm that we want to install Kirby Panel at PATH
+      if (ask("Kirby Panel will be installed to: " . rtrim(PATH, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . "panel\nIs that OK?")){
+         echo "+ Working...\n  - Initializing Kirby Panel...\n";
+         chdir(PATH);
+         mkdir("panel");
+         shell_exec("git submodule --quiet init panel && git submodule --quiet update panel");
+
+         if (has_panel) {
+            echo "Kirby Panel has been installed to " . PATH . "\n";
+         }
+      } else {
+         exit; // User refused install. Let's exit.
+      }
 }
 
 // Performs the actual update on Kirby by updating git submodules
