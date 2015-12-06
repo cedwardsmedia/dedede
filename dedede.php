@@ -100,23 +100,34 @@ function install() {
 
    precheck();
 
-   // Confirm that the user wants to install Kirby to the chosen path
-   echo "I will download Kirby to " . PATH ."\nIs that OK? [Y/N]: ";
+// Asks user a question and returns TRUE for YES or FALSE for NO
+function ask($Q) {
+   echo "$Q [Y/N]: ";
    $response = trim(fgets(STDIN));
 
-   // Validate Response
    if ($response == "Y"){
-      // User confirmed. Let's proceed!
-      doinstall();
+      // User confirmed Panel install. Let's init the submodule
+      return TRUE;
    } elseif ($response == "N"){
-      // User had a change of heart. Let's die.
-      exit;
+      return FALSE;
    } else {
-      // User did not specify Y or N
-      echo "Please type Y or N.\n";
-      install();
+      // User did not enter Y or N
+      echo "Please type Y or N.";
+      ask($Q);
    }
 }
+// This function is called when the install command is passed
+   function install() {
+   // Run precheck to prevent common errors
+      precheck();
+
+   // Confirm that the user wants to install Kirby to the chosen path
+      if (ask("I will download Kirby to " . PATH ."\nIs that OK?")){
+         doinstall();
+      } else {
+         exit;
+      }
+   }
 
 // The meat of the script. Here, we actually download and install Kirby
 function doinstall(){
@@ -128,21 +139,14 @@ function doinstall(){
    initialize_toolkit();
 
    // Ask if we want to keep the panel
-   echo "+ Do you want to install the Kirby Panel? [Y/N]: ";
-   $response = trim(fgets(STDIN));
-
-   if ($response == "Y"){
+   if (ask("Do you want to install the Kirby Panel?")){
       // User confirmed Panel install. Let's init the submodule
       echo "  - Initializing Kirby Panel...\n";
       shell_exec("git submodule --quiet init panel && git submodule --quiet update panel");
-   } elseif ($response == "N"){
+   } else {
       // User refused Panel install. Let's remove the Panel submodule
       shell_exec("git rm --cached panel");
-   } else {
-      // User did not enter Y or N
-      echo "Please type Y or N.";
    }
-
    // We really need to verify the installation before printing this message.
    echo "+ Success! Kirby has been installed to " . PATH . "\n";
 
@@ -193,19 +197,13 @@ function update() {
    }
 
    // Confirm that we want to update Kirby at PATH
-   echo "+ Do you want to update Kirby at " . PATH . "? [Y/N]: ";
-   $response = trim(fgets(STDIN));
-
    // Validate user response
-   if ($response == "Y"){
+   if (ask("+ Do you want to update Kirby at " . PATH . "?")){
       // User confirmed update. Let's update Kirby!
       doupdate();
-   } elseif ($response == "N"){
+   } else {
       // User refused update. Let's exit.
       exit;
-   } else {
-      // User did not enter Y or N
-      echo "Please type Y or N.";
    }
 }
 
