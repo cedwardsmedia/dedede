@@ -43,13 +43,17 @@ _Dedede_ is a command line script for creating a [Kirby CMS](http://www.getkirby
 
 ## History
 
-- **[_Dec 6, 2015_]: 1.1.0** Added debug command and internal changes
+- **[_Dec 6, 2015_]: 1.1.0** Added debug command, panel command, and a plethora of internal changes.
   - Introduced `debug` command for printing out various information useful for troubleshooting and debugging real-world user scenarios.
+  - Introduced `panel` command for installing the Kirby Panel to a git-based (or Dedede-installed) copy of Kirby where the panel does not already exist.
   - Relaxed Y/N input to accept case-insensitive "yes" and "no" entries.
   - Introduced new internal functions and consolidated previously reused code to optimize Dedede.
   - Added more error handlers to reduce gibberish for non-dev users.
   - Fixed a bug where Dedede would attempt to update Panel even if it wasn't installed, thus printing an error to the screen.
   - Fixed a bug where Dedede would not properly check for Kirby before attempting to update.
+  - Added full status checking for the install process. Dedede prints a status report following each step, considering failure to clone the starterkit or initalize the Kirby system folder or toolkit to be fatal errors. Dedede will not err out if the Panel fails to initalize, but will warn the user of the failure.
+  - Updated the installing/updating display to reflect the new status reports.
+
 
 
 - [_Dec 4, 2015_]: 1.0.1 Added pre-install and pre-update sanity checks.

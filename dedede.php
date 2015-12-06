@@ -82,7 +82,12 @@
          update();
          break;
 
-      // Let's print debug info
+      // Let's install the Panel!
+      case 'panel':
+         installpanel();
+         break;
+
+      // Let's print debug info!
       case 'debug':
          debug();
          break;
@@ -132,14 +137,24 @@
    // Ask if we want to keep the panel
       if (ask("Do you want to install the Kirby Panel?")){
       // User confirmed Panel install. Let's init the submodule
-         echo "  - Initializing Kirby Panel...\n";
+         echo "  - Initializing Kirby Panel...\r";
          shell_exec("git submodule --quiet init panel && git submodule --quiet update panel");
+         if (shell_exec("git submodule status panel")) {
+            echo "  ✓ \n\n";
+         } else {
+            echo "  ✗ \n\n";
+            $error_panel = 1;
+         }
       } else {
       // User refused Panel install. Let's remove the Panel submodule
-         shell_exec("git rm --cached panel");
+         rmdir(PATH . "/panel");
       }
-   // We really need to verify the installation before printing this message.
-      echo "+ Success! Kirby has been installed to " . PATH . "\n";
+
+      echo "Success! Kirby has been installed to " . PATH . "\n";
+
+      if ($error_panel) {
+         echo "However, Dedede was unable to install the Kirby Panel.\nPlease run 'dedede debug' and open a new issue on GitHub.\n";
+      }
 
    // Check for mbstring extension in PHP (required by Kirby)
       if (!extension_loaded('mbstring')) {
@@ -152,45 +167,64 @@
 // Git clone Kirby Starter Kit to PATH
    function clone_kirby() {
       echo "+ Working...\n";
-      echo "  - Cloning Kirby...\n";
+      echo "  - Cloning Kirby...\r";
       shell_exec("git clone https://github.com/getkirby/starterkit " . PATH . " --quiet");
 
-      chdir(PATH); // Change back to PATH
+      chdir(PATH); // Change to PATH
 
+      if (shell_exec("git status")) {
+         echo "  ✓ \n";
+      } else {
+         echo "  ✗ \n\n";
+         exit("Dedede was unable to clone Kirby.\nPlease run 'dedede debug' and open a new issue on GitHub.\n");
+      }
    // Remove the Kirby origin
       shell_exec("git remote remove origin");
    }
 
 // Initialize the Kirby System Folder submodule
    function initialize_kirby() {
-      echo "  - Initializing Kirby system folder...\n";
+      echo "  - Initializing Kirby system folder...\r";
       shell_exec("git submodule --quiet init kirby && git submodule --quiet update kirby");
+      if (shell_exec("git submodule status kirby")) {
+         echo "  ✓ \n";
+      } else {
+         echo "  ✗ \n\n";
+         exit("Dedede was unable to initialize the Kirby system folder.\nPlease run 'dedede debug' and open a new issue on GitHub.\n");
+      }
    }
 
 // Initialize Kirby Toolkit
    function initialize_toolkit() {
-      echo "  - Initizalizing Kirby toolkit...\n";
+      echo "  - Initizalizing Kirby toolkit...\r";
       chdir("kirby");
       shell_exec("git submodule --quiet init toolkit && git submodule --quiet update toolkit");
+      if (shell_exec("git submodule status toolkit")) {
+         echo "  ✓ \n";
+      } else {
+         echo "  ✗ \n\n";
+         exit("Dedede was unable to initialize the Kirby toolkit.\nPlease run 'dedede debug' and open a new issue on GitHub.\n");
+      }
       chdir(PATH);
    }
 
 // Update Kirby using git submodules
    function update() {
-   // Run precheck to prevent common errors
+      // Run precheck to prevent common errors
       precheck();
       if (!is_kirby(PATH)) {
          exit("Dedede cannot find a Kirby installation at " . PATH . "\n");
       } elseif (!is_git(PATH)){
          exit("\nIt seems Dedede did not install Kirby to " . PATH . "\nAlternatively, the Kirby installation wasn't cloned with git.\nDedede can only update Kirby installations installed with Dedede or cloned with git.\n\n");
-   }
-
-   // Confirm that we want to update Kirby at PATH
+      }
+      // Confirm that we want to update Kirby at PATH
       if (ask("+ Do you want to update Kirby at " . PATH . "?")){
          doupdate(); // User confirmed update. Let's update Kirby!
       } else {
          exit; // User refused update. Let's exit.
       }
+   }
+
 // Install Kirby Panel using git submodules
    function installpanel() {
    // Run precheck to prevent common errors
@@ -222,22 +256,24 @@
       echo "+ Working...\n";
       chdir(PATH); // Change to the Kirby project directory
    // Update the Kirby System Folder submodule
-      echo "  - Updating Kirby system folder...\n";
+      echo "  - Updating Kirby system folder...\r";
       shell_exec("git submodule --quiet update kirby");
-
+      echo "  ✓ \n";
    // Update Kirby Toolkit
-      echo "  - Updating Kirby toolkit...\n";
+      echo "  - Updating Kirby toolkit...\r";
+      echo "  ✓ \n";
       chdir("kirby"); // Change to the Kirby directory
       shell_exec("git submodule --quiet update toolkit");
       chdir(PATH); // Change back to Kirby project directory
 
    // Update the Panel if it exists
       if (has_panel(PATH)) {
-         echo "  - Updating Kirby Panel...\n";
+         echo "  - Updating Kirby Panel...\r";
          shell_exec("git submodule --quiet update panel");
+         echo "  ✓ \n";
       }
       // We really need to validate the status before printing this
-      echo "+ Success! Kirby has been updated at " . PATH . "\n";
+      echo "\nSuccess! Kirby has been updated at " . PATH . "\n";
       exit(0);
    }
 
