@@ -2,7 +2,7 @@
 <?php
 
 // Define values
-define(VERSION, "1.0.1"); // Dedede version
+define(VERSION, "1.1.0"); // Dedede version
 define(MINPHPVER, "5.3"); // Minimum supported PHP version
 
 // Disable error reporting
@@ -81,6 +81,11 @@ switch (COMMAND) {
    // Let's update Kirby!
    case 'update':
       update();
+      break;
+
+   // Let's print debug info
+   case 'debug':
+      debug();
       break;
 
    // No command was passed, print usage
@@ -261,6 +266,45 @@ function precheck() {
       exit("Dedede cannot connect to Github: $errstr ($errno)\nDedede must be able to connect to GitHub on port 9418 to download Kirby.\n");
    }
 }
+
+// Print Debug information for developer
+function debug() {
+   // Print General System Information
+   echo "General Information:\n";
+   echo " + Operating System: " . PHP_OS . "\n";
+   $conn = fsockopen("github.com", 9418, $errno, $errstr, 5);
+   echo " + GitHub connection: ";
+   if (!$conn) {
+      echo "$errstr ($errno)\n";
+   } else {
+      echo "Success!\n";
+   }
+   // Print Git Information
+   echo "Git Information:\n";
+   echo " + Git version: " . ltrim(shell_exec("git --version"), "git version ");
+   echo " + Git binary: " . shell_exec("which git");
+
+   // Print PHP Information
+   echo "PHP Information:\n";
+   echo " + PHP binary: " . PHP_BINARY . "\n";
+   echo " + PHP version: " . PHP_VERSION . "\n";
+
+   // Print Misc. Information
+   echo "Misc. Information:\n";
+   echo " + Target: " . PATH . "\n";
+   echo " + Target writeable: ";
+   if (is_writeable(PATH)) {echo "Yes\n";} else {echo "No\n";}
+   echo " + Target empty: ";
+   if (count(scandir(PATH)) > 2) {echo "No\n";} else {echo "Yes\n";}
+   echo " + Target Kirby: ";
+   if (file_exists(PATH. "/kirby/kirby.php")) {echo "Yes\n";} else {echo "No\n";}
+   echo " + Target Panel: ";
+   if (file_exists(PATH. "/panel/index.php")) {echo "Yes\n";} else {echo "No\n";}
+   echo " + Target Git Repo: ";
+   if (file_exists(PATH. "/.git/config")) {echo "Yes\n";} else {echo "No\n";}
+   echo "\n\nPlease include the above output in your support request.\n";
+}
+
 // Print simple help information for Dedede
 function help() {
    echo "Dedede is a command line tool for creating and updating Kirby CMS installations.\n\nDedede can install the latest Kirby release to a directory of your choosing by executing `dedede install /path/to/install/kirby`. Dedede will download the latest Kirby release from GitHub and ask if you wish to install the Kirby Panel. By using Dedede, you can remove many of the, otherwise tedious, steps involved in setting up an easily updateable Kirby installation.\n\nDedede can update any Kirby installation that was cloned from GitHub or created using Dedede. Dedede uses git submodules to do this.\n\nDedede is a personal project that may or may not receive new features beyond this core functionality. Dedede was crafted by Corey Edwards (@cedwardsmedia) and is licensed under the MIT License.\n";
