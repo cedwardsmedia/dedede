@@ -386,7 +386,26 @@ HELP;
 
 // Print usage information
    function usage() {
-      echo "Usage: dedede [command] /path/to/project\n\n  + Available commands:\n    - install => Dedede will install a fresh copy of Kirby to the specified path.\n      Example: dedede install /home/cedwardsmedia/kirby\n\n    - update => Dedede will update the existing copy of Kirby at the specified path.\n      Example: dedede update /home/cedwardsmedia/kirby-outdated\n\n  + Caveats:\n    - Dedede does not currently handle errors encountered during git processes.\n      (This will be fixed very soon.)\n    - When installing Kirby, the path must either not exist or must be empty.\n    - Dedede can not update a non-git (or non-Dedede installed) copy of Kirby.\n\n  + Notes:\n    - Dedede officially supports Kirby 2.2+. However, it should work for all of 2.x\n";
+      $usagetext = <<<USAGE
+Usage: dedede [command] /path/to/project
+
+  + Available commands:
+    - install => Dedede will install a fresh copy of Kirby to the specified path.
+      Example: dedede install /home/cedwardsmedia/kirby
+
+    - update => Dedede will update the existing copy of Kirby at the specified path.
+      Example: dedede update /home/cedwardsmedia/kirby-outdated
+
+  + Caveats:
+    - Dedede does not currently handle errors encountered during git processes.
+      (This will be fixed very soon.)
+    - When installing Kirby, the path must either not exist or must be empty.
+    - Dedede can not update a non-git (or non-Dedede installed) copy of Kirby.
+
+  + Notes:
+    - Dedede officially supports Kirby 2.2+. However, it should work for all of 2.x\n
+USAGE;
+      echo wordwrap($usagetext, shell_exec('/usr/bin/tput cols'), "\n");
       exit(0);
    }
 
