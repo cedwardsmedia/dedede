@@ -42,7 +42,7 @@
       } else {
 
          // If no valid flag was passed, consider it a command
-         define(COMMAND, $_SERVER['argv'][1]);
+         define("COMMAND", $_SERVER['argv'][1]);
       }
    }
 
@@ -54,24 +54,24 @@
 
       if ($path[0] == DIRECTORY_SEPARATOR) {
          // User specified an absolute path, so let's use it
-         define(PATH, $_SERVER['argv'][2]);
+         define("PATH", $_SERVER['argv'][2]);
       } elseif (substr($path, 0, 2) == "./") {
          // User specified our current working directory. Let's sanitize the path for the sake of cleanliness and readability
-         define(PATH, getcwd() . "/" . str_replace("./", "", $path));
+         define("PATH", getcwd() . "/" . str_replace("./", "", $path));
       } elseif ($path == ".." || $path == "../" ) {
          // User specified the parent directory. We can't do this because the parent directory is obviously not empty. Let's err and die.
          echo "Cannot install Kirby to parent directory. Target must be empty or not exist.\n";
          exit(1);
       } elseif (substr($path, 0, 2) == ".." && (strlen($path) > 2)) {
          // User specified a sibling (or child of a sibling) directory. Let's resolve the ../ to the actual path for cleanliness and readability.
-         define(PATH, dirname(getcwd()) . "/" . str_replace("../", "", $_SERVER['argv'][2]));
+         define("PATH", dirname(getcwd()) . "/" . str_replace("../", "", $_SERVER['argv'][2]));
       } else {
          // User specified a child of the current working directory. Let's use it.
-         define(PATH, getcwd() . "/" . $_SERVER['argv'][2]);
+         define("PATH", getcwd() . "/" . $_SERVER['argv'][2]);
       }
    } else {
       // No path has been specified, so let's get the current working directory
-      define(PATH, getcwd());
+      define("PATH", getcwd());
    }
 
 // Process command
