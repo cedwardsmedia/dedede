@@ -2,8 +2,8 @@
 <?php
 
 // Define values
-   define(VERSION, "1.1.0"); // Dedede version
-   define(MINPHPVER, "5.3"); // Minimum supported PHP version
+   define("VERSION", "1.1.0"); // Dedede version
+   define("MINPHPVER", "5.3"); // Minimum supported PHP version
 
 // Disable warnings and notices
    error_reporting(E_ERROR | E_PARSE);
