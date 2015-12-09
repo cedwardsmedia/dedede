@@ -93,6 +93,11 @@
          installpanel();
          break;
 
+      // Let's clear the cache!
+      case 'clearcache':
+         clearcache();
+         break;
+
       // Let's print debug info!
       case 'debug':
          debug();
@@ -283,6 +288,9 @@
          shell_exec("git submodule --quiet update panel");
          echo "  ✓ \n";
       }
+
+      clearcache();
+
       // We really need to validate the status before printing this
       echo "\nSuccess! Kirby has been updated at " . PATH . "\n";
       exit(0);
@@ -386,7 +394,21 @@
       echo "\n\nPlease include the above output in your support request.\n";
    }
 
-// Display donate odbc_setoption
+// Clean Kirby Cache
+    function clearcache() {
+        if (!is_empty(PATH . DS . "site" . DS . "cache" . DS)){
+           echo "  - Clearing Kirby Cache...\r";
+
+        $files = glob(PATH . DS . "site" . DS . "cache" . DS . "*"); // get all file names
+
+        foreach($files as $file){ // iterate files
+            if(is_file($file) && !(strstr($file, "index.html")))
+            unlink($file); // delete file
+        }
+           echo "  ✓ \n";
+        }
+   }
+// Display donate option
    function donate() {
       if (PHP_OS == "Darwin") {
          shell_exec("open \"https://gratipay.com/~cedwardsmedia/\"");
