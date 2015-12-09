@@ -22,7 +22,7 @@
    }
 
    // Check for compatible OS
-   if (PHP_OS != "Windows") {
+   if (PHP_OS == "Windows") {
       exit("Sorry, Dedede does not currently run on Windows.\n");
    }
 
