@@ -21,6 +21,11 @@
       exit(1);
    }
 
+   // Check for compatible OS
+   if (PHP_OS != "Windows") {
+      exit("Sorry, Dedede does not currently run on Windows.\n");
+   }
+
 // Check to see if a command has been issued
    // Commands are issued in array key 1
    if ( array_key_exists ("1", $_SERVER['argv']) ) {
