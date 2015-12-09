@@ -4,6 +4,7 @@
 // Define values
    define("VERSION", "1.1.0"); // Dedede version
    define("MINPHPVER", "5.3"); // Minimum supported PHP version
+   define("DS", DIRECTORY_SEPARATOR); // Alias DIRECTORY_SEPARATOR as DS
 
 // Disable warnings and notices
    error_reporting(E_ERROR | E_PARSE);
@@ -55,19 +56,19 @@
       if ($path[0] == DIRECTORY_SEPARATOR) {
          // User specified an absolute path, so let's use it
          define("PATH", $_SERVER['argv'][2]);
-      } elseif (substr($path, 0, 2) == "./") {
+      } elseif (substr($path, 0, 2) == "." . DS) {
          // User specified our current working directory. Let's sanitize the path for the sake of cleanliness and readability
-         define("PATH", getcwd() . "/" . str_replace("./", "", $path));
-      } elseif ($path == ".." || $path == "../" ) {
+         define("PATH", getcwd() . DS . str_replace("." . DS, "", $path));
+      } elseif ($path == ".." || $path == ".." . DS ) {
          // User specified the parent directory. We can't do this because the parent directory is obviously not empty. Let's err and die.
          echo "Cannot install Kirby to parent directory. Target must be empty or not exist.\n";
          exit(1);
       } elseif (substr($path, 0, 2) == ".." && (strlen($path) > 2)) {
          // User specified a sibling (or child of a sibling) directory. Let's resolve the ../ to the actual path for cleanliness and readability.
-         define("PATH", dirname(getcwd()) . "/" . str_replace("../", "", $_SERVER['argv'][2]));
+         define("PATH", dirname(getcwd()) . DS . str_replace(".." . DS, "", $_SERVER['argv'][2]));
       } else {
          // User specified a child of the current working directory. Let's use it.
-         define("PATH", getcwd() . "/" . $_SERVER['argv'][2]);
+         define("PATH", getcwd() . DS . $_SERVER['argv'][2]);
       }
    } else {
       // No path has been specified, so let's get the current working directory
@@ -157,7 +158,7 @@
          }
       } else {
       // User refused Panel install. Let's remove the Panel submodule
-         rmdir(PATH . "/panel");
+         rmdir(PATH . DS . "panel");
       }
 
       echo "Success! Kirby has been installed to " . PATH . "\n";
@@ -247,7 +248,7 @@
 
 
    // Confirm that we want to install Kirby Panel at PATH
-      if (ask("Kirby Panel will be installed to: " . rtrim(PATH, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . "panel\nIs that OK?")){
+      if (ask("Kirby Panel will be installed to: " . rtrim(PATH, DS) . DS . "panel\nIs that OK?")){
          echo "+ Working...\n  - Initializing Kirby Panel...\n";
          chdir(PATH);
          mkdir("panel");
@@ -324,7 +325,7 @@
 
 // Check if directory is a Kirby installation
    function is_kirby($path) {
-      if (file_exists($path. "/kirby/kirby.php")) {
+      if (file_exists($path. DS . "kirby" . DS . "kirby.php")) {
          return 1;
       } else {
          return 0;
@@ -333,7 +334,7 @@
 
 // Check if Kirby has panel
    function has_panel($path) {
-      if (file_exists(PATH . "/panel/index.php")) {
+      if (file_exists(PATH . DS . "panel" . DS . "index.php")) {
          return 1;
       } else {
          return 0;
@@ -341,7 +342,7 @@
    }
 // Check if directory is a git repo
    function is_git($path) {
-      if (file_exists(PATH . "/.git/config")) {
+      if (file_exists(PATH . DS . ".git" . DS . "config")) {
          return 1;
       } else {
          return 0;
