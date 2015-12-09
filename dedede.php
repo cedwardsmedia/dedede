@@ -97,6 +97,11 @@
          debug();
          break;
 
+      // Let's make a donation!
+      case 'donate':
+         donate();
+         break;
+
       // No command was passed, print usage
       default:
          usage();
@@ -380,6 +385,16 @@
       echo "\n\nPlease include the above output in your support request.\n";
    }
 
+// Display donate odbc_setoption
+   function donate() {
+      if (PHP_OS == "Darwin") {
+         shell_exec("open \"https://gratipay.com/~cedwardsmedia/\"");
+      } elseif (PHP_OS == "Linux" && shell_exec("xdg-open")) {
+         shell_exec("xdg-open \"https://gratipay.com/~cedwardsmedia/\"");
+      } else {
+         echo wordwrap("Dedede is a free and open source project. If you find it useful, please consider making a small donation to the developer via Gratipay: https://gratipay.com/~cedwardsmedia/", shell_exec('/usr/bin/tput cols'), "\n");
+      }
+   }
 // Print simple help information for Dedede
    function help() {
       $helptext = <<<HELP
@@ -409,6 +424,9 @@ Usage: dedede [command] /path/to/project
 
   + Notes:
     - Dedede officially supports Kirby 2.2+. However, it should work for all of 2.x\n
+
+  + Donate:
+    - Dedede is a free and open source project. If you find it useful, please consider making a small donation to the developer via Gratipay: https://gratipay.com/~cedwardsmedia/
 USAGE;
       echo wordwrap($usagetext, shell_exec('/usr/bin/tput cols'), "\n");
       exit(0);
