@@ -305,6 +305,12 @@
 
          if (COMMAND == "install") {
             // Check if the target PATH is empty
+
+            // Delete .DS_Store on OS X to prevent false positive
+            if (file_exists(PATH . DS . ".DS_Store")) {
+                unlink(PATH . DS . ".DS_Store");
+            }
+
             if (!is_empty(PATH)) {
                exit("Dedede cannot install Kirby to " .PATH . "\n" . PATH ." is not empty.\n");
             }
