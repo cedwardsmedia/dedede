@@ -1,8 +1,8 @@
-![Dedede v1.1.0](https://cdn.cedwardsmedia.com/images/dedede/dededelogo.png "Dedede Logo")
+![Dedede v1.1.1](https://cdn.cedwardsmedia.com/images/dedede/dededelogo.png "Dedede Logo")
 
 
 [![Source](https://img.shields.io/badge/source-cedwardsmedia/dedede-blue.svg?style=flat-square "Source")](https://www.github.com/cedwardsmedia/dedede)
-![Version](https://img.shields.io/badge/version-1.1.0-brightgreen.svg?style=flat-square)
+![Version](https://img.shields.io/badge/version-1.1.1-brightgreen.svg?style=flat-square)
 [![License](https://img.shields.io/badge/license-MIT-lightgrey.svg?style=flat-square "License")](./LICENSE)
 [![Gratipay](https://img.shields.io/gratipay/cedwardsmedia.svg?style=flat-square "License")](https://gratipay.com/~cedwardsmedia/)
 
@@ -11,8 +11,7 @@ Made for **Kirby** with **♥**
 _Dedede_ is a command line script for creating a [Kirby CMS](http://www.getkirby.com/) project. It automates the repetitive tasks of cloning the Kirby git repo, initializing the submodules, etc. Dedede was originally written to automate my workflow to make life easier and allow me to spend my time where it belongs - building the website, not preparing the project.
 
 ## Requirements
- - PHP 5.3
- - Git
+Dedede will run on any OS X, Linux, BSD, or other UNIX-like OS capable of running PHP 5.3 and Git. Dedede is not currently compatible with any version of Windows.
 
 **Note**: Dedede only requires PHP and Git to work. It will throw an error if you are running anything earlier than PHP 5.3. As Dedede is intended for use during development and design of a Kirby-based project, Dedede does not (and likely never will) check for Apache 2 with mod_rewrite or NGINX.
 
@@ -42,8 +41,18 @@ _Dedede_ is a command line script for creating a [Kirby CMS](http://www.getkirby
 5. Submit a pull request ^^,
 
 ## History
+- **[_Dec 9, 2015_]: 1.1.1** Minor bug fixes
+  - Introduced donate command to allow user to make donation to the developer.
+  - Introduced `clearcache` command to flush the Kirby cache during development. Dedede will automatically flush Kirby's cache after an update.
+  - Fixed Issue #1 where opening an existing target directory in Finder on OS X would prevent an install due to the creation of the .DS_Store file. Dedede now removes this file when the `install` command is given.
+  - Cleaned up code to adhere to better conventions and to ease the possible future release of a Windows-compatible version.
+  - Rewrote `usage()` and `help()` to use heredoc format for readability.
+  - Fixed definitions of constants to prevent PHP errors on some builds of PHP
+  - Added OS detection to prevent failing attempts to operate on Windows (Dedede currently utilizes a few UNIX-only commands that prevents Windows compatibility)
 
-- **[_Dec 6, 2015_]: 1.1.0** Added debug command, panel command, and a plethora of internal changes.
+
+
+- [_Dec 6, 2015_]: 1.1.0 Added debug command, panel command, and a plethora of internal changes.
   - Introduced `debug` command for printing out various information useful for troubleshooting and debugging real-world user scenarios.
   - Introduced `panel` command for installing the Kirby Panel to a git-based (or Dedede-installed) copy of Kirby where the panel does not already exist.
   - Relaxed Y/N input to accept case-insensitive "yes" and "no" entries.

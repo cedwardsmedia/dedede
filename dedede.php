@@ -2,7 +2,7 @@
 <?php
 
 // Define values
-   define("VERSION", "1.1.0"); // Dedede version
+   define("VERSION", "1.1.1"); // Dedede version
    define("MINPHPVER", "5.3"); // Minimum supported PHP version
    define("DS", DIRECTORY_SEPARATOR); // Alias DIRECTORY_SEPARATOR as DS
 
