@@ -471,7 +471,10 @@ Usage: dedede [command] /path/to/project
     - Dedede officially supports Kirby 2.2+. However, it should work for all of 2.x\n
 
   + Donate:
-    - Dedede is a free and open source project. If you find it useful, please consider making a small donation to the developer via Gratipay: https://gratipay.com/~cedwardsmedia/
+    - Dedede is a free and open source project. If you find it useful, please
+      consider making a small donation to the developer via Gratipay:
+      https://gratipay.com/~cedwardsmedia/
+
 USAGE;
       echo wordwrap($usagetext, shell_exec('/usr/bin/tput cols'), "\n");
       exit(0);
