@@ -103,6 +103,11 @@
          debug();
          break;
 
+      // Let's buy Kirby!
+      case 'buy':
+         buy();
+         break;
+
       // Let's make a donation!
       case 'donate':
          donate();
@@ -424,6 +429,17 @@
          echo wordwrap("Dedede is a free and open source project. If you find it useful, please consider making a small donation to the developer via Gratipay: https://gratipay.com/~cedwardsmedia/", shell_exec('/usr/bin/tput cols'), "\n");
       }
    }
+
+// Display buy option
+      function buy() {
+         if (PHP_OS == "Darwin") {
+            shell_exec("open \"http://getkirby.com/buy\"");
+        } elseif (PHP_OS == "Linux" && shell_exec("xdg-open")) {
+            shell_exec("xdg-open \"http://getkirby.com/buy\"");
+         } else {
+            echo wordwrap("You can try Kirby on your local machine as long as you want and the source is available on Github. But as soon as you want to use Kirby in production, you must purchase a license.\n\nShow the developer some love and buy a license: http://getkirby.com/buy\n", shell_exec('/usr/bin/tput cols'), "\n");
+         }
+      }
 // Print simple help information for Dedede
    function help() {
       $helptext = <<<HELP
