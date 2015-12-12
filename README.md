@@ -40,53 +40,6 @@ Dedede will run on any OS X, Linux, BSD, or other UNIX-like OS capable of runnin
 4. Push to the branch: `git push origin my-new-feature`
 5. Submit a pull request ^^,
 
-## History
-- **[_Dec 9, 2015_]: 1.1.1** Minor bug fixes
-  - Introduced donate command to allow user to make donation to the developer.
-  - Introduced `clearcache` command to flush the Kirby cache during development. Dedede will automatically flush Kirby's cache after an update.
-  - Fixed Issue #1 where opening an existing target directory in Finder on OS X would prevent an install due to the creation of the .DS_Store file. Dedede now removes this file when the `install` command is given.
-  - Cleaned up code to adhere to better conventions and to ease the possible future release of a Windows-compatible version.
-  - Rewrote `usage()` and `help()` to use heredoc format for readability.
-  - Fixed definitions of constants to prevent PHP errors on some builds of PHP
-  - Added OS detection to prevent failing attempts to operate on Windows (Dedede currently utilizes a few UNIX-only commands that prevents Windows compatibility)
-
-
-
-- [_Dec 6, 2015_]: 1.1.0 Added debug command, panel command, and a plethora of internal changes.
-  - Introduced `debug` command for printing out various information useful for troubleshooting and debugging real-world user scenarios.
-  - Introduced `panel` command for installing the Kirby Panel to a git-based (or Dedede-installed) copy of Kirby where the panel does not already exist.
-  - Relaxed Y/N input to accept case-insensitive "yes" and "no" entries.
-  - Introduced new internal functions and consolidated previously reused code to optimize Dedede.
-  - Added more error handlers to reduce gibberish for non-dev users.
-  - Fixed a bug where Dedede would attempt to update Panel even if it wasn't installed, thus printing an error to the screen.
-  - Fixed a bug where Dedede would not properly check for Kirby before attempting to update.
-  - Added full status checking for the install process. Dedede prints a status report following each step, considering failure to clone the starterkit or initalize the Kirby system folder or toolkit to be fatal errors. Dedede will not err out if the Panel fails to initalize, but will warn the user of the failure.
-  - Updated the installing/updating display to reflect the new status reports.
-
-
-
-- [_Dec 4, 2015_]: 1.0.1 Added pre-install and pre-update sanity checks.
-   - Dedede now checks to see if the target path exists and is empty. This will prevent most (if not all) git-based errors Dedede encounters.
-   - Dedede now checks connectivity with Github.com before attempting to clone or update Kirby. If we can't connect, we can't install or update, right?
-
-
-- [_Nov 22, 2015_]: 1.0 Major internal changes.
-   - Introduced `install` and `update` commands.
-   - Introduced `-v` & `--version` and `-h` & `--help` flags to print the version and help, respectively.
-   - Running Dedede without a command now prints usage information.
-   - Added sanity checks for path argument. (For handling `./`, `../`, etc.)
-
-
-- [_Nov 18, 2015_]: 0.1 Initial stable release
-
-## To-do:
-
-1. Add ability to check various parameters of existing Kirby installation.
-2. Add ability to "git-ify" non-git-based Kirby installation. (i.e. one downloaded explicitly as ZIP file from Kirby site)
-3. Consider adding ability to download and install Kirby themes. (long-term)
-4. Print debug info on fatal error.
-5. Think of something else to add here.
-
 
 ## Credits
 Concept and original codebase: Corey Edwards ([@cedwardsmedia](https://www.twitter.com/cedwardsmedia))
