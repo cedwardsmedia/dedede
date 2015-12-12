@@ -10,9 +10,10 @@ This project (mostly) adheres to [Semantic Versioning](http://semver.org/). The 
 
 ### Changed
 - Moved project history to CHANGELOG.md
+- Changed dates in CHANGELOG.md to meet [ISO 8601 Standard](http://www.iso.org/iso/home/standards/iso8601.htm).
 
 
-## [1.1.1] - Dec 9, 2015
+## [1.1.1] - 2015-12-09
 
 #### Added
 - Introduced donate command to allow user to make donation to the developer.
@@ -29,7 +30,7 @@ This project (mostly) adheres to [Semantic Versioning](http://semver.org/). The 
 - Fixed Issue #1 where opening an existing target directory in Finder on OS X would prevent an install due to the creation of the .DS_Store file. Dedede now removes this file when the `install` command is given.
 - Fixed definitions of constants to prevent PHP errors on some builds of PHP
 
-### [1.1.0] - Dec 6, 2015
+### [1.1.0] - 2015-12-06
 
 #### Added
 - Introduced `debug` command for printing out various information useful for troubleshooting and debugging real-world user scenarios.
@@ -50,14 +51,14 @@ This project (mostly) adheres to [Semantic Versioning](http://semver.org/). The 
 
 
 
-### [1.0.1] - Dec 4, 2015
+### [1.0.1] - 2015-12-04
 
 #### Added
 - Dedede now checks to see if the target path exists and is empty. This will prevent most (if not all) git-based errors Dedede encounters.
 - Dedede now checks connectivity with Github.com before attempting to clone or update Kirby. If we can't connect, we can't install or update, right?
 
 
-### [1.0.0] - Nov 22, 2015
+### [1.0.0] - 2015-11-22
 #### Added
 - Introduced `install` and `update` commands.
 - Introduced `-v` & `--version` and `-h` & `--help` flags to print the version and help, respectively.
@@ -65,5 +66,5 @@ This project (mostly) adheres to [Semantic Versioning](http://semver.org/). The 
 - Added sanity checks for path argument. (For handling `./`, `../`, etc.)
 
 
-### [0.0.1] - Nov 18, 2015
+### [0.0.1] - 2015-11-18
 - Initial stable release
