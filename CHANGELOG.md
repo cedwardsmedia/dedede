@@ -16,7 +16,7 @@ This project (mostly) adheres to [Semantic Versioning](http://semver.org/). The 
 ## [1.1.1] - 2015-12-09
 
 #### Added
-- Introduced donate command to allow user to make donation to the developer.
+- Introduced `donate` command to allow user to make donation to the developer.
 - Introduced `clearcache` command to flush the Kirby cache during development. Dedede will automatically flush Kirby's cache after an update.
 - Added OS detection to prevent failing attempts to operate on Windows (Dedede currently utilizes a few UNIX-only commands that prevents Windows compatibility)
 
