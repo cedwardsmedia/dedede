@@ -7,6 +7,7 @@ This project (mostly) adheres to [Semantic Versioning](http://semver.org/). The 
 ## [Work in Progress]
 #### Added
 - Introduced `buy` command to open the Buy Kirby page.
+- Introduced `config` command to open the Kirby config.php file in the default editor.
 
 #### Changed
 - Moved project history to CHANGELOG.md

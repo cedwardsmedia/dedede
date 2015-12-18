@@ -88,6 +88,11 @@
          update();
          break;
 
+      // Let's configure Kirby!
+      case 'config':
+         config();
+         break;
+
       // Let's install the Panel!
       case 'panel':
          installpanel();
@@ -332,6 +337,21 @@
          exit("Dedede cannot connect to Github: $errstr ($errno)\nDedede must be able to connect to GitHub on port 9418 to download Kirby.\n");
       }
    }
+
+// Open config.php in default PHP Editor
+    function config() {
+        if (file_exists(PATH. DS . "site" . DS . "config" . DS . "config.php")) {
+            if (PHP_OS == "Darwin") {
+               shell_exec("open " . PATH. DS . "site" . DS . "config" . DS . "config.php");
+           } elseif (PHP_OS == "Linux" && shell_exec("xdg-open")) {
+               shell_exec("xdg-open " . PATH. DS . "site" . DS . "config" . DS . "config.php");
+            } else {
+               echo wordwrap("You can try Kirby on your local machine as long as you want and the source is available on Github. But as soon as you want to use Kirby in production, you must purchase a license.\n\nShow the developer some love and buy a license: http://getkirby.com/buy\n", shell_exec('/usr/bin/tput cols'), "\n");
+            }
+        } else {
+            exit("Dedede cannot find config.php at " . PATH. DS . "site" . DS . "config" . DS . "\n");
+        }
+    }
 
 // Check if directory is empty
    function is_empty($path) {
