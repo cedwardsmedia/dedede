@@ -346,7 +346,7 @@
            } elseif (PHP_OS == "Linux" && shell_exec("xdg-open")) {
                shell_exec("xdg-open " . PATH. DS . "site" . DS . "config" . DS . "config.php");
             } else {
-               echo wordwrap("You can try Kirby on your local machine as long as you want and the source is available on Github. But as soon as you want to use Kirby in production, you must purchase a license.\n\nShow the developer some love and buy a license: http://getkirby.com/buy\n", shell_exec('/usr/bin/tput cols'), "\n");
+               echo wordwrap("Dedede is unable to open the default editor for PHP files on your computer. More than likely, this is due to a limitation in Dedede and not a problem with your system. However, you are more than welcome to run `dedede debug` and open a new issue on GitHub for help, if you believe this to be in error.\n", shell_exec('/usr/bin/tput cols'), "\n");
             }
         } else {
             exit("Dedede cannot find config.php at " . PATH. DS . "site" . DS . "config" . DS . "\n");
