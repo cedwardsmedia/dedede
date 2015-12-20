@@ -12,6 +12,7 @@ This project (mostly) adheres to [Semantic Versioning](http://semver.org/). The 
 #### Changed
 - Moved project history to CHANGELOG.md
 - Changed dates in CHANGELOG.md to meet [ISO 8601 Standard](http://www.iso.org/iso/home/standards/iso8601.htm).
+- Modified `debug()` to write output to dedede.log and screen.
 
 
 ## [1.1.1] - 2015-12-09
