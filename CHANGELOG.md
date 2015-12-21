@@ -4,7 +4,7 @@
 All notable changes to this project will be documented in this file.
 This project (mostly) adheres to [Semantic Versioning](http://semver.org/). The notable exception is the first stable release being marked as **1.0.0**.
 
-## [Work in Progress]
+## [1.1.2]
 #### Added
 - Introduced `buy` command to open the Buy Kirby page.
 - Introduced `config` command to open the Kirby config.php file in the default editor.
@@ -15,7 +15,7 @@ This project (mostly) adheres to [Semantic Versioning](http://semver.org/). The 
 - Modified `debug()` to write output to dedede.log and screen.
 
 
-## [1.1.1] - 2015-12-09
+### [1.1.1] - 2015-12-09
 
 #### Added
 - Introduced `donate` command to allow user to make donation to the developer.
