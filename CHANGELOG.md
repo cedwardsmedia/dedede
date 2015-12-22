@@ -4,7 +4,7 @@
 All notable changes to this project will be documented in this file.
 This project (mostly) adheres to [Semantic Versioning](http://semver.org/). The notable exception is the first stable release being marked as **1.0.0**.
 
-## [1.1.2]
+## [1.1.2] - 2015-12-21
 #### Added
 - Introduced `buy` command to open the Buy Kirby page.
 - Introduced `config` command to open the Kirby config.php file in the default editor.
