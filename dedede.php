@@ -163,12 +163,12 @@
    // Ask if we want to keep the panel
       if (ask("Do you want to install the Kirby Panel?")){
       // User confirmed Panel install. Let's init the submodule
-         echo "  - Initializing Kirby Panel...\r";
+         echo "  \033[0;33m●\033[0m Initializing Kirby Panel...\r";
          shell_exec("git submodule --quiet init panel && git submodule --quiet update panel");
          if (shell_exec("git submodule status panel")) {
-            echo "  ✓ \n\n";
+            echo "  \033[0;32m●\033[0m\n\n";
          } else {
-            echo "  ✗ \n\n";
+            echo "  \033[0;31m●\033[0m \n\n";
             $error_panel = 1;
          }
       } else {
@@ -193,15 +193,15 @@
 // Git clone Kirby Starter Kit to PATH
    function clone_kirby() {
       echo "+ Working...\n";
-      echo "  - Cloning Kirby...\r";
+      echo "  \033[0;33m●\033[0m Cloning Kirby...\r";
       shell_exec("git clone https://github.com/getkirby/starterkit " . PATH . " --quiet");
 
       chdir(PATH); // Change to PATH
 
       if (shell_exec("git status")) {
-         echo "  ✓ \n";
+         echo "  \033[0;32m●\033[0m \n";
       } else {
-         echo "  ✗ \n\n";
+         echo "  \033[0;31m●\033[0m \n\n";
          exit("Dedede was unable to clone Kirby.\nPlease run 'dedede debug' and open a new issue on GitHub.\n");
       }
    // Remove the Kirby origin
@@ -210,25 +210,25 @@
 
 // Initialize the Kirby System Folder submodule
    function initialize_kirby() {
-      echo "  - Initializing Kirby system folder...\r";
+      echo "  \033[0;33m●\033[0m Initializing Kirby system folder...\r";
       shell_exec("git submodule --quiet init kirby && git submodule --quiet update kirby");
       if (shell_exec("git submodule status kirby")) {
-         echo "  ✓ \n";
+         echo "  \033[0;32m●\033[0m \n";
       } else {
-         echo "  ✗ \n\n";
+         echo "  \033[0;31m●\033[0m \n\n";
          exit("Dedede was unable to initialize the Kirby system folder.\nPlease run 'dedede debug' and open a new issue on GitHub.\n");
       }
    }
 
 // Initialize Kirby Toolkit
    function initialize_toolkit() {
-      echo "  - Initizalizing Kirby toolkit...\r";
+      echo "  \033[0;33m●\033[0m Initializing Kirby toolkit...\r";
       chdir("kirby");
       shell_exec("git submodule --quiet init toolkit && git submodule --quiet update toolkit");
       if (shell_exec("git submodule status toolkit")) {
-         echo "  ✓ \n";
+         echo "  \033[0;32m●\033[0m \n";
       } else {
-         echo "  ✗ \n\n";
+         echo "  \033[0;31m●\033[0m \n\n";
          exit("Dedede was unable to initialize the Kirby toolkit.\nPlease run 'dedede debug' and open a new issue on GitHub.\n");
       }
       chdir(PATH);
@@ -282,21 +282,21 @@
       echo "+ Working...\n";
       chdir(PATH); // Change to the Kirby project directory
    // Update the Kirby System Folder submodule
-      echo "  - Updating Kirby system folder...\r";
+      echo "  \033[0;33m●\033[0m Updating Kirby system folder...\r";
       shell_exec("git submodule --quiet update kirby");
-      echo "  ✓ \n";
+      echo "  \033[0;32m●\033[0m \n";
    // Update Kirby Toolkit
-      echo "  - Updating Kirby toolkit...\r";
-      echo "  ✓ \n";
+      echo "  \033[0;33m●\033[0m Updating Kirby toolkit...\r";
+      echo "  \033[0;32m●\033[0m \n";
       chdir("kirby"); // Change to the Kirby directory
       shell_exec("git submodule --quiet update toolkit");
       chdir(PATH); // Change back to Kirby project directory
 
    // Update the Panel if it exists
       if (has_panel(PATH)) {
-         echo "  - Updating Kirby Panel...\r";
+         echo "  \033[0;33m●\033[0m Updating Kirby Panel...\r";
          shell_exec("git submodule --quiet update panel");
-         echo "  ✓ \n";
+         echo "  \033[0;32m●\033[0m \n";
       }
 
       clearcache();
