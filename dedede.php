@@ -264,7 +264,7 @@
 
    // Confirm that we want to install Kirby Panel at PATH
       if (ask("Kirby Panel will be installed to: " . rtrim(PATH, DS) . DS . "panel\nIs that OK?")){
-         echo "+ Working...\n  - Initializing Kirby Panel...\n";
+         echo "+ Working...\n - Initializing Kirby Panel...\n";
          chdir(PATH);
          mkdir("panel");
          shell_exec("git submodule --quiet init panel && git submodule --quiet update panel");
