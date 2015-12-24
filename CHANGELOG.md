@@ -4,6 +4,10 @@
 All notable changes to this project will be documented in this file.
 This project (mostly) adheres to [Semantic Versioning](http://semver.org/). The notable exception is the first stable release being marked as **1.0.0**.
 
+## Work in Progress
+#### Changed
+- Replaced ✓ and ✗ status indicators with green, yellow, and red ● indicators aesthetic reasons. Green indicates success, red indicates failure, and yellow indicates the current task.
+
 ## [1.1.2] - 2015-12-21
 #### Added
 - Introduced `buy` command to open the Buy Kirby page.
