@@ -1,8 +1,8 @@
-![Dedede v1.1.2](https://cdn.cedwardsmedia.com/images/dedede/dededelogo.png "Dedede Logo")
+![Dedede v1.1.3](https://cdn.cedwardsmedia.com/images/dedede/dededelogo.png "Dedede Logo")
 
 
 [![Source](https://img.shields.io/badge/source-cedwardsmedia/dedede-blue.svg?style=flat-square "Source")](https://www.github.com/cedwardsmedia/dedede)
-![Version](https://img.shields.io/badge/version-1.1.2-brightgreen.svg?style=flat-square)
+![Version](https://img.shields.io/badge/version-1.1.3-brightgreen.svg?style=flat-square)
 [![License](https://img.shields.io/badge/license-MIT-lightgrey.svg?style=flat-square "License")](./LICENSE)
 [![Gratipay](https://img.shields.io/gratipay/cedwardsmedia.svg?style=flat-square "License")](https://gratipay.com/~cedwardsmedia/)
 
