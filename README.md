@@ -1,10 +1,23 @@
-![Dedede v1.1.3](https://cdn.cedwardsmedia.com/images/dedede/dededelogo.png "Dedede Logo")
+![Dedede v1.2.0s](https://cdn.cedwardsmedia.com/images/dedede/dededelogo.png "Dedede Logo")
 
 
 [![Source](https://img.shields.io/badge/source-cedwardsmedia/dedede-blue.svg?style=flat-square "Source")](https://www.github.com/cedwardsmedia/dedede)
 ![Version](https://img.shields.io/badge/version-1.1.3-brightgreen.svg?style=flat-square)
 [![License](https://img.shields.io/badge/license-MIT-lightgrey.svg?style=flat-square "License")](./LICENSE)
 [![Gratipay](https://img.shields.io/gratipay/cedwardsmedia.svg?style=flat-square "License")](https://gratipay.com/~cedwardsmedia/)
+
+
+# Note
+----
+> With the introduction of the [official Kirby CLI utility](https://github.com/getkirby/cli), I will no longer be developing Dedede as I see no way to offer more than Bastian can offer with the official CLI. Dedede was originally written to automate the gitting of the starterkit repo, initialization of the submodules, panel installation, updates, etc. It served its purpose for me for several months, but its usefulness has now run its course.
+
+----
+
+# **STOP!**
+----
+> Due to the restructuring of the Kirby git repo, specifically the removal of submodules, Dedede is not only useless but can potentially cause data loss if used on an existing Kirby installation. This repo will remain online solely for archival purposes.
+
+----
 
 Made for **Kirby** with **♥**
 
